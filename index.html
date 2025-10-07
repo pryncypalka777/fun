@@ -1,1 +1,350 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #8b5cf6, #a855f7, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b5cf6;
+            font-size: 1.2rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .game-card {
+            background: linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: #8b5cf6;
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.2);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #f1f5f9;
+        }
+
+        .game-description {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .game-features {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .play-button {
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: auto;
+        }
+
+        .play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .soon-button {
+            background: linear-gradient(45deg, #303030, #555555);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: auto;
+        }
+
+        .soon-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(27, 27, 27, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .game-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">777</div>
+            <div class="subtitle">Odkryj kolekcję ekscytujących gier</div>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Wyszukaj grę..." id="searchInput">
+            <div class="search-icon">🔍</div>
+        </div>
+
+        <div class="games-grid" id="gamesGrid">
+            <!-- Kafelki gier będą dodane przez JavaScript -->
+        </div>
+
+        <div class="footer">
+            777host.pl © 2025 - Stworzono przez @pryncypalka
+        </div>
+    </div>
+
+    <script>
+        const games = [
+            {
+                id: 'slownie',
+                title: 'SŁOWNIE',
+                description: 'Odgadnij dzienne słowo! Masz 6 prób na odkrycie ukrytego 5-literowego słowa. Kolory pomogą Ci znaleźć właściwą odpowiedź.',
+                icon: '📚',
+                features: ['Codzienne wyzwanie', 'Edukacyjna', '5-literowe słowa'],
+                link: 'slownie.html'
+            },
+            {
+                id: 'matematyk',
+                title: 'MATEMATYK',
+                description: 'Rozwiązuj matematyczne łamigłówki i ćwicz swój umysł. Różne poziomy trudności dla każdego.',
+                icon: '🔢',
+                features: ['Matematyka', 'Edukacyjna', 'Różne poziomy'],
+                link: '#'
+            },
+            {
+                id: 'memory',
+                title: 'MEMORY',
+                description: 'Tradycyjna gra w pamięć. Odkrywaj karty i znajdź wszystkie pary w jak najmniejszej liczbie ruchów.',
+                icon: '🧠',
+                features: ['Pamięć', 'Rodzinna', 'Łatwa nauka'],
+                link: '#'
+            },
+            {
+                id: 'szachy',
+                title: 'SZACHY',
+                description: 'Klasyczna gra strategiczna. Rozwijaj myślenie taktyczne i pokonaj przeciwnika.',
+                icon: '♟️',
+                features: ['Strategia', 'Klasyczna', 'Wymagająca'],
+                link: '#'
+            },
+            {
+                id: 'quiz',
+                title: 'QUIZ',
+                description: 'Sprawdź swoją wiedzę w różnych kategoriach. Tysiące pytań czeka na odpowiedzi!',
+                icon: '❓',
+                features: ['Wiedza', 'Różne kategorie', 'Ranking'],
+                link: '#'
+            },
+            {
+                id: 'sudoku',
+                title: 'SUDOKU',
+                description: 'Popularna łamigłówka liczbowa. Wypełnij diagram zgodnie z zasadami i trenuj logiczne myślenie.',
+                icon: '9️⃣',
+                features: ['Logika', 'Liczby', 'Relaksująca'],
+                link: '#'
+            }
+        ];
+
+        function renderGames(filteredGames = games) {
+            const gamesGrid = document.getElementById('gamesGrid');
+            
+            if (filteredGames.length === 0) {
+                gamesGrid.innerHTML = '<div class="no-results">Nie znaleziono gier spełniających kryteria wyszukiwania</div>';
+                return;
+            }
+
+            gamesGrid.innerHTML = filteredGames.map(game => `
+                <div class="game-card" onclick="window.location.href='${game.link}'">
+                    <div class="game-icon">${game.icon}</div>
+                    <h3 class="game-title">${game.title}</h3>
+                    <p class="game-description">${game.description}</p>
+                    <div class="game-features">
+                        ${game.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+                    <button class="play-button">GRAJ TERAZ</button>
+                </div>
+            `).join('');
+        }
+
+        // Wyszukiwanie
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredGames = games.filter(game => 
+                game.title.toLowerCase().includes(searchTerm) ||
+                game.description.toLowerCase().includes(searchTerm) ||
+                game.features.some(feature => feature.toLowerCase().includes(searchTerm))
+            );
+            renderGames(filteredGames);
+        });
+
+        // Inicjalizacja
+        renderGames();
+    </script>
+</body>
+</html>
